@@ -15,7 +15,8 @@ _Rationale:_
  - _Minimise effort required to add a new implementations_. 
  - _Avoid 2nd class emulations of special features that are only
    available on some platforms. Special features can go in a
-   separate API. HTTPS is the most common use-case._
+   separate API._
+ - _HTTPS is the most common use-case._
 
 
 **TCP Connection hidden by API**
@@ -25,8 +26,8 @@ The API does not expose the underlying TCP connection or raw file descriptors.
 _Rationale:_
  -  _Makes the Small API requirement easier to meet._
  -  _Allows use of platform APIs where the interaction between the
-    encryption layer and TCP/IP stack is integrated/optimised, or_
- -  _where the TCP layer is not accessible (e.g embedded system with
+    encryption layer and TCP/IP stack is integrated/optimised, or
+    where the TCP layer is not accessible (e.g embedded system with
     external WiFI module)._
 
 
@@ -134,6 +135,6 @@ int tls_wait(void* tls, int timeout_ms)
 List of Platform Vendor Supported TLS implementations:
  - MS Windows: [MS SSPI Schannel](https://msdn.microsoft.com/en-us/library/windows/desktop/aa374782(v=vs.85).aspx)
  - iOS/macOS: [Apple Security.SecureTransport](https://developer.apple.com/documentation/security/secure_transport)
- - AWS: [Amazon s2n](https://github.com/awslabs/s2n)
+ - AWS: [Amazon s2n](https://github.com/awslabs/s2n) (see also [tlsclient.c](https://github.com/samoconnor/tlsclient/blob/master/tlsclient.c))
  - Linux: [OpenSSL](https://www.openssl.org)
  - Mbed OS: [ARM Mbed TLS](https://github.com/ARMmbed/mbedtls)
