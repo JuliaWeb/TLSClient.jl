@@ -79,7 +79,7 @@ _Rationale:_
 `tls_client.h`:
 
 ```C
-// All functions returns 1 on success, 0 on failure.
+// All functions return 1 on success, 0 on failure.
 // On failutre: *err is an error code , e.g. :TLS_LIBRARY_NOT_FOUND,
 // and *errmsg is a description of what went wrong.
 
