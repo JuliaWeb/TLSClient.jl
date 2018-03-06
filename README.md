@@ -98,12 +98,12 @@ int tls_connect(char* host, char* port,
 
 
 // Close the conncetion.
-int tls_close(void* tls, char** err, char** errmsg)
+int tls_close(void* tls, char** err, char** errmsg);
 
 
 // Is the connection open?.
 // isopen returns 1 or 0.
-int tls_close(void* tls, int* isopen, char** err, char** errmsg)
+int tls_close(void* tls, int* isopen, char** err, char** errmsg);
 
 
 // Send bytes.
