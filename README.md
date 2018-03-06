@@ -51,7 +51,7 @@ _Rationale:_
 where the platform implementation has a `RawFD` for the connection).
 
 _Rationale:_
- - _Try to avoid behaviour differences tha might arise from different
+ - _Try to avoid behaviour differences that might arise from different
    ways of polling and pumping the Julia event loop._
  - _Take advantage of future improvements in `poll_fd`._
 
@@ -80,7 +80,7 @@ _Rationale:_
 
 ```C
 // All functions return 1 on success, 0 on failure.
-// On failutre: *err is an error code , e.g. :TLS_LIBRARY_NOT_FOUND,
+// On failure: *err is an error code , e.g. :TLS_LIBRARY_NOT_FOUND,
 // and *errmsg is a description of what went wrong.
 
 
@@ -97,7 +97,7 @@ int tls_connect(char* host, char* port,
                 jl_sym_t** err, char** errmsg);
 
 
-// Close the conncetion.
+// Close the connection.
 int tls_close(void* tls, char** err, char** errmsg);
 
 
@@ -118,7 +118,7 @@ int tls_bytesavailable(void* tls, int* nbytes,
                        jl_sym_t** err, char** errmsg);
 
 
-// Recieve bytes.
+// Receive bytes.
 // nin returns number of bytes read into buf.
 int tls_read(void* tls, uint8_t* buf, size_t n, size_t* nin,
              jl_sym_t** err, char** errmsg);
