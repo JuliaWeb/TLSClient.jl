@@ -125,7 +125,7 @@ int tls_read(void* tls, uint8_t* buf, size_t n, size_t* nin,
 
 
 // Wait (for connection, handshake, read/write network activity etc).
-int tls_wait(void* tls, int timeout_ms)
+int tls_wait(void* tls, int timeout_ms,
              jl_sym_t** err, char** errmsg);
 ```
 
