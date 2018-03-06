@@ -11,10 +11,11 @@ WIP/Proposal for a Julia client interface for OS-native TLS over TCP.
 The API has the minimum number of functions and options required to
 abstract the underlying implementations and to support HTTPS. 
 
-_Rationale: Minimise effort required to add a new implementations. 
-            Avoid 2nd class emulations of special features that are only
-            available on some platforms. Special features can go in a
-            separate API. HTTPS is the most common use-case._
+_Rationale:
+ - Minimise effort required to add a new implementations. 
+ - Avoid 2nd class emulations of special features that are only
+   available on some platforms. Special features can go in a
+   separate API. HTTPS is the most common use-case._
 
 
 **TCP Connection hidden by API**
@@ -34,11 +35,12 @@ The API calls are all non-blocking (except for `wait(::TLSStream)`).
 This includes no waiting for the network and no waiting for
 [internal locks](https://github.com/JuliaWeb/MbedTLS.jl/blob/master/src/ssl.jl#L211).
 
-_Rationale: Makes the Small API requirement easier to meet.
-            Reduces the chance of user visible platform behaviour differences
-            in timing and sequencing (which can result in race conditions,
-            deadlocks etc).
-            Blocking APIs can be implemented  using `wait` at a higher layer._
+_Rationale:
+Makes the Small API requirement easier to meet.
+Reduces the chance of user visible platform behaviour differences
+in timing and sequencing (which can result in race conditions,
+deadlocks etc).
+Blocking APIs can be implemented  using `wait` at a higher layer._
 
 
 **Common wait implementation**
