@@ -134,7 +134,7 @@ int tls_wait(void* tls, int timeout_ms,
 
 List of Platform Vendor Supported TLS implementations:
  - MS Windows: [MS SSPI Schannel](https://msdn.microsoft.com/en-us/library/windows/desktop/aa374782(v=vs.85).aspx)
- - iOS/macOS: [Apple Security.SecureTransport](https://developer.apple.com/documentation/security/secure_transport)
+ - iOS/macOS: [Apple Security.SecureTransport](https://developer.apple.com/documentation/security/secure_transport) or [CFStream and kCFStreamSocketSecurityLevelNegotiatedSSL](https://github.com/dinhviethoa/libetpan/blob/master/src/data-types/mailstream_cfstream.c#L976)
  - AWS: [Amazon s2n](https://github.com/awslabs/s2n) (see also [tlsclient.c](https://github.com/samoconnor/tlsclient/blob/master/tlsclient.c))
  - Linux: [OpenSSL](https://www.openssl.org)
  - Mbed OS: [ARM Mbed TLS](https://github.com/ARMmbed/mbedtls)
