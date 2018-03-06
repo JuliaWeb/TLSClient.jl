@@ -6,11 +6,10 @@ WIP/Proposal for a Julia client interface for OS-native TLS over TCP.
 
 ## Requirements
 
-**Requirement: Small API**
+**Small API**
 
-The API has the minimum number of functions and arguments required to
-abstract the minimal common subset of the underlying implementations
-that is required to support HTTPS. 
+The API has the minimum number of functions and options required to
+abstract the underlying implementations and to support HTTPS. 
 
 _Rationale: Minimise effort required to add a new implementations. 
             Avoid 2nd class emulations of special features that are only
@@ -18,7 +17,7 @@ _Rationale: Minimise effort required to add a new implementations.
             separate API. HTTPS is the most common use-case._
 
 
-**Requirement: API Hides TCP Connection**
+**TCP Connection hidden by API**
 
 The API does not expose the underlying TCP connection or raw file descriptors.
 
@@ -29,7 +28,7 @@ _Rationale: Makes the Small API requirement easier to meet.
             external WiFI module)._
 
 
-**Requirement: Non blockig API**
+**Non blockig API**
 
 The API calls are all non-blocking (except for `wait(::TLSStream)`).
 This includes no waiting for the network and no waiting for
@@ -39,11 +38,10 @@ _Rationale: Makes the Small API requirement easier to meet.
             Reduces the chance of user visible platform behaviour differences
             in timing and sequencing (which can result in race conditions,
             deadlocks etc).
-
             Blocking APIs can be implemented  using `wait` at a higher layer._
 
 
-**Requirement: Common wait implementation**
+**Common wait implementation**
 
 `wait(tls::TLSStream)` should just call `poll_fd` on a `RawFD` (in cases
 where the platform implementation has a `RawFD` for the connection).
@@ -53,7 +51,7 @@ _Rationale: Try to avoid behaviour differences tha might arise from different
             Take advantage of future improvements in `poll_fd`._
 
 
-**Requirement: C Abstraction layer**
+**C Abstraction layer**
 
 The Julia API interfaces with a single common C header using simple C types.
 Each platform implementation provides a dynamic library that implements this
