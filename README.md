@@ -22,11 +22,12 @@ _Rationale:_
 
 The API does not expose the underlying TCP connection or raw file descriptors.
 
-_Rationale: Makes the Small API requirement easier to meet.
-            Allows use of platform APIs where the interaction between the
-            encryption layer and TCP/IP stack is integrated/optimised,
-            or where the TCP layer is not accessible (e.g embedded system with
-            external WiFI module)._
+_Rationale:_
+ -  _Makes the Small API requirement easier to meet._
+ -  _Allows use of platform APIs where the interaction between the
+    encryption layer and TCP/IP stack is integrated/optimised, or_
+ -  _where the TCP layer is not accessible (e.g embedded system with
+    external WiFI module)._
 
 
 **Non blockig API**
@@ -35,12 +36,12 @@ The API calls are all non-blocking (except for `wait(::TLSStream)`).
 This includes no waiting for the network and no waiting for
 [internal locks](https://github.com/JuliaWeb/MbedTLS.jl/blob/master/src/ssl.jl#L211).
 
-_Rationale:
-Makes the Small API requirement easier to meet.
-Reduces the chance of user visible platform behaviour differences
-in timing and sequencing (which can result in race conditions,
-deadlocks etc).
-Blocking APIs can be implemented  using `wait` at a higher layer._
+_Rationale:_
+ - _Makes the Small API requirement easier to meet._
+ - _Reduces the chance of user visible platform behaviour differences
+   in timing and sequencing (which can result in race conditions,
+   deadlocks etc)._
+ - _Blocking APIs can be implemented  using `wait` at a higher layer._
 
 
 **Common wait implementation**
@@ -48,9 +49,10 @@ Blocking APIs can be implemented  using `wait` at a higher layer._
 `wait(tls::TLSStream)` should just call `poll_fd` on a `RawFD` (in cases
 where the platform implementation has a `RawFD` for the connection).
 
-_Rationale: Try to avoid behaviour differences tha might arise from different
-            ways of polling and pumping the Julia event loop.
-            Take advantage of future improvements in `poll_fd`._
+_Rationale:_
+ - _Try to avoid behaviour differences tha might arise from different
+   ways of polling and pumping the Julia event loop._
+ - _Take advantage of future improvements in `poll_fd`._
 
 
 **C Abstraction layer**
@@ -59,11 +61,16 @@ The Julia API interfaces with a single common C header using simple C types.
 Each platform implementation provides a dynamic library that implements this
 C interface.
 
-_Rationale: Avoid fragile mapping of C structs into Julia code.
-            Support platforms where the native API is not compatible with
-            `ccall` (C++?). Allow more direct use of platform refernece
-            examples. e.g. "Here is how you connect a Schannel to a WinSock...",
-            better not to have to translate all of that into ccalls._
+_Rationale:_
+ - _Avoid fragile mapping of C structs into Julia code._
+ - _Support platforms where the native API is not compatible with
+   `ccall` (C++?)._
+ - _Allow more direct use of platform refernece examples. e.g.
+   "Here is how you connect a Schannel to a WinSock...",
+   less risk of introducing bugs if that is not all translated into `ccalls`._
+ - _Simplify creation of minimal breaking examples when submitting bug reports
+   to vendors_.
+ - _Make things easier for external security auditors to understand._
             
 
 ## API Sketch
