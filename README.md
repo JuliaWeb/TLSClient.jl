@@ -11,9 +11,9 @@ WIP/Proposal for a Julia client interface for OS-native TLS over TCP.
 The API has the minimum number of functions and options required to
 abstract the underlying implementations and to support HTTPS. 
 
-_Rationale:
- - Minimise effort required to add a new implementations. 
- - Avoid 2nd class emulations of special features that are only
+_Rationale:_
+ - _Minimise effort required to add a new implementations_. 
+ - _Avoid 2nd class emulations of special features that are only
    available on some platforms. Special features can go in a
    separate API. HTTPS is the most common use-case._
 
